@@ -15,6 +15,7 @@ export default class NewClass extends cc.Component {
 
     _x:number=0
     _y:number=0
+    _step:number=1
     // LIFE-CYCLE CALLBACKS:
     setItemColor(color:cc.Color){
         this.node.color=color
@@ -22,6 +23,11 @@ export default class NewClass extends cc.Component {
     isEqual(p:cc.Vec2):boolean{
         return p.x==this._x&&p.y==this._y
     }
+
+    getStep():number{
+        return this._step
+    }
+    //
     setXAndY(x:number,y:number){
         this._x=x
         this._y=y
@@ -29,7 +35,7 @@ export default class NewClass extends cc.Component {
     getXAndY():cc.Vec2{
         return new cc.Vec2(this._x,this._y)
     }
-    // onLoad () {}
+    // 
     getNumber():string{
         return this.number.string
     }

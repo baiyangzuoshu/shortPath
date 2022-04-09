@@ -24,7 +24,8 @@ export default class NewClass extends cc.Component {
     onLoad () {
         this.loadItem()
         this.scheduleOnce(()=>{
-            this.searchPath(new cc.Vec2(0,0),new cc.Vec2(5,5))
+            //this.searchPath(new cc.Vec2(0,0),new cc.Vec2(5,5))
+            //this.searchPath2(new cc.Vec2(5,5),4)
         },5)
 
         this.schedule(()=>{
@@ -152,7 +153,39 @@ export default class NewClass extends cc.Component {
     }
     //起始点，走step到达的点
     searchPath2(start:cc.Vec2,step:number){
+        let startItem=this.getItemByPoint(start)
+        let ts=startItem.getComponent("item")
+        step=step-ts.getStep()
+        if(0==step)return
 
+        for(let i=0;i<4;i++)
+        {
+            let p=new cc.Vec2(start.x,start.y)
+
+            if(0==i)
+            {
+                p.x-=1
+            }
+            else if(1==i)
+            {
+                p.x+=1
+            }
+            else if(2==i)
+            {
+                p.y-=1
+            }
+            else if(3==i)
+            {
+                p.y+=1
+            }
+            let findItem=this.getItemByPoint(p)
+            if(findItem)
+            {
+                let ts=findItem.getComponent("item")
+                ts.setItemColor(new cc.Color(0,255,0,255))
+                this.searchPath2(p,step)
+            }
+        }
     }
 
     // update (dt) {}
